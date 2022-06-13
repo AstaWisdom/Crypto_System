@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3lt7y%6ca7oeqpmq^udqf*n4j5@12gswi#060+a_h=l^bjx9ry'
+SECRET_KEY = 'Put Your Secret KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -146,8 +146,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'trading.bot.messages@gmail.com'
-EMAIL_HOST_PASSWORD = 'qwertyuiop[]1234567890'
+EMAIL_HOST_USER = 'Your Gmail'
+EMAIL_HOST_PASSWORD = 'Your Gmail Password'
 
 # Redirect Login
 LOGIN_REDIRECT_URL = 'homepage'
