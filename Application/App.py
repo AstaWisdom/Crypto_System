@@ -9,9 +9,10 @@ import mplfinance as mpf
 import yfinance as yf
 from threading import Thread
 
-api_key = '61a1f8454e0ec70001f5adbf'
-api_secret = 'd7d36a40-4b6a-4f68-98e2-ae946c2ca303'
-api_pass = 'Qwertyui12345'
+
+api_key = 'YOUR API KEY'
+api_secret = 'YOUR API SECRET KEY'
+api_pass = 'YOUR API SECRET PASSWORD'
 all_threads = []
 
 class Application:
