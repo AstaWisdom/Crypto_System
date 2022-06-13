@@ -13,9 +13,9 @@ from random import randint
 from Room.utils import send_mail_auth, calculate_indicators
 
 # Create your views here.
-api_key = ''
-api_secret = ''
-api_pass = ''
+api_key = 'Your API KEY OF KUCOIN'
+api_secret = 'Your API SECRET KEY OF KUCOIN'
+api_pass = 'Your API PASSWORD OF KUCOIN'
 #client = Client(api_key, api_secret, api_pass)
 
 def register(request):
