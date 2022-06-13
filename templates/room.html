@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+
+
+    <script>
+        LoadCharts();
+    </script>
+
+<div class="card text-center">
+
+  <div class="card-body">
+    <h5 class="card-title">Trade</h5>
+    <p class="card-text">See the Price Form the Chart and Analysis</p>
+    <p class="card-text">For Buy and Sell Click on the buttons below</p>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#Buymodal">
+        Buy
+    </button>
+    <button class="btn btn-danger" data-toggle="modal" data-target="#Sellmodal">
+        Sell
+    </button>
+  </div>
+
+
+
+<!-- modal for buy -->
+<div class="modal fade" id="Buymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">BUY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action={% url 'buy' %}>
+
+            {% csrf_token %}
+            <input type="text" name="Amount">
+            {% buttons submit='buy' %}
+            {% endbuttons %}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal for sell -->
+<div class="modal fade" id="Sellmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">SELL</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method="post" action={% url 'sell' %}>
+            {% csrf_token %}
+            <input type="text" name="Amount">
+            {% buttons submit='sell' %}
+            {% endbuttons %}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">Analysis</h1>
+  <p class="lead">{{ crypto.description }}</p>
+  <hr class="my-4">
+  <p>Please wait a while and Refresh the page after 10 or 15 minutes for analysis to refresh</p>
+  <p class="lead">
+    Do Not Forget that the Signals Or Information About Trading Is not Always Perfect So Do it At your Own Risk.
+  </p>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">MACD</h1>
+  <hr class="my-4">
+  <p >This indicator consist of 3 parts Signal line Macd line and Histogram. Histogram is the bars that means distance between signal and macd line if histogram is big number means two line faraway from each other.
+      when the histogram is up means macd line is above signal line, when is down means macd line is below signal line.
+      signal line is the smooth line ( like moving average ), when macd line cross with signal line from below we can say that its a buy signal.
+      when macd line cross the signal line from above we can say that its a sell signal.
+  </p>
+  <hr class="my-4">
+  <p class="lead">
+    Do Not Forget that the Signals Or Information About Trading Is not Always Perfect So Do it At your Own Risk.
+  </p>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">RSI</h1>
+  <hr class="my-4">
+  <p>This Indicator Is a line between 100 and 70 when the line above 70 means the market is overbought that means when line crossing 70 for going bottom might be a signal for sell</p>
+  <hr class="my-4">
+  <p class="lead">
+    Do Not Forget that the Signals Or Information About Trading Is not Always Perfect So Do it At your Own Risk.
+  </p>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">STOC HASTIC</h1>
+  <hr class="my-4">
+  <p>This indicator consist of two lines fast line and slow line, when fast line cross slow line from above can be a sell signal.
+  when fast line cross the slow line from below can be a buy signal.
+  </p>
+  <hr class="my-4">
+  <p class="lead">
+    Do Not Forget that the Signals Or Information About Trading Is not Always Perfect So Do it At your Own Risk.
+  </p>
+</div>
+
+{% endblock body %}
+{% block script %}
+    <script>
+    function LoadCharts(){
+        new TradingView.widget({
+          "width": 980,
+          "height": 610,
+          "symbol": "KUCOIN:{{ symbol }}" ,
+          "interval": "30",
+          "timezone": "Etc/UTC",
+          "theme": "light",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "#f1f3f6",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "studies": [
+            "MACD@tv-basicstudies",
+            "RSI@tv-basicstudies",
+            "Stochastic@tv-basicstudies"
+          ],
+          "container_id": "tdview"
+}
+  );
+    }
+</script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+{% endblock script %}

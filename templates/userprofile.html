@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="row">
+      <div class="col-4">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Profile</a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Trades</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Deposit</a>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+              <fieldset disabled>
+                  <label class="label mt-sm-2">Username:</label>
+                  <input class="form-control" value="{{ user.username }}">
+
+                  <label class="label mt-sm-2">First Name:</label>
+                  <input name="first_name" class="form-control" value="{{ user.userinfo.name }}">
+                  <label class="label mt-sm-2">Last Name:</label>
+                  <input name="last_name" class="form-control" value="{{ user.userinfo.family_name }}">
+                  <label class="label mt-sm-2">Email:</label>
+                  <input name="email" class="form-control" value="{{ user.userinfo.email }}">
+                  <label class="label mt-sm-2">API Token:</label>
+                  <input name="trade_link" class="form-control" value="{{ user.userinfo.api_key }}">
+              </fieldset>
+          </div>
+          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Order ID</th>
+                      <th scope="col">Order Type</th>
+                      <th scope="col">Order Size</th>
+                      <th scope="col">Amount</th>
+                    </tr>
+                  </thead>
+                  {% for od in orders %}
+                  {% if od.complete %}
+                  <tbody>
+                    <tr>
+                      <th scope="row">{{ od.order_id }}</th>
+                      <td>{{ od.order_type }}</td>
+                      <td>{{od.order_size}}</td>
+                      <td>{{ od.order_amount }}</td>
+                    </tr>
+                  </tbody>
+                  {% endif %}
+              {% endfor %}
+              </table>
+
+          </div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="Money-Amount">
+              <fieldset disabled>
+                  <label class="label mt-sm-2">Amount</label>
+                  <input name="trade_link" class="form-control" value="{{ user.userinfo.money_amount }}">
+              </fieldset>
+              <br>
+              <button class="btn btn-primary">Deposit</button>
+          </div>
+          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+        </div>
+      </div>
+    </div>
+
+{% endblock body %}

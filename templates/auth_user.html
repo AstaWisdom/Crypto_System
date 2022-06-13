@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <form method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <input name="auth_number" type="text" class="form-control" placeholder="Code" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Register</button>
+              </div>
+            </div>
+    </form>
+        {{ mes }}
+{% endblock body %}

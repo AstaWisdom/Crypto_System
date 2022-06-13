@@ -1,0 +1,110 @@
+<!doctype html>
+{% load bootstrap4 %}
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>My Site</title>
+    {% block script %}
+    {% endblock script %}
+  </head>
+  <body>
+    <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            <img src="#" width="30" height="30" alt="">
+            My Site
+        </a>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav mr-auto ml-5">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Crypto Room
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="{% url 'room' 'BTC' %}">BitCoin</a>
+                      <a class="dropdown-item" href="{% url 'room' 'ETH' %}">Ethereum</a>
+
+                    </div>
+
+                </li>
+
+
+            </ul>
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_staff %}
+                    <a class="navbar-text mt-0 mb-0 mr-sm-3" href="">
+                    Hello,( {{ request.user.username }} ) / <a class="navbar-text mt-0 mb-0 mr-sm-3" href="{% url 'logout' %}">Logout</a>
+                </a>
+                {% else %}
+                    <a class="navbar-text mt-0 mb-0 mr-sm-3" href="{% url 'userprofile' request.user.id %}">
+                    Hello,( {{ request.user.username }} ) / <a class="navbar-text mt-0 mb-0 mr-sm-3" href="{% url 'logout' %}">Logout</a>
+                </a>
+                    <h style="color: white">Money : ({{ request.user.userinfo.money_amount }})</h>
+                {% endif %}
+            {% else %}
+            <a class="navbar-text mt-0 mb-0 mr-sm-3" href="{% url 'register' %}">
+                Register /<a class="navbar-text mt-0 mb-0 mr-sm-3" href="{% url 'login' %}">Login</a>
+            </a>
+            {% endif %}
+            <a class="navbar-brand" href="">
+
+
+            </a>
+        </div>
+
+    </nav>
+  <!-- Container of body -->
+  <div class="container">
+      {% block body %}
+            <div class="jumbotron">
+              <h1 class="display-4">Hello, Welcome</h1>
+              <p class="lead">This Site Is for the ones who want to trade in cyrpto currencies but for any reasons such as they dont know much about trading system or dont know when
+              they should trade.
+              </p>
+              <hr class="my-4">
+              <p>this site will proccess the three indicators such as MACD ( Moving Average Convergence Divergence ), RSI ( Relative Index Strengh ) and Stockhastic then provide the information for you to know when you should buy and sell.</p>
+              <p>Do Not Forget that the Signals Or Information About Trading Is not Always Perfect So Do it At your Own Risk.</p>
+            </div>
+            {% if not request.user.is_authenticated %}
+            <div class="jumbotron">
+              <h1 class="display-4">Register</h1>
+              <p class="lead">For Using This Site And Application First You need to register Here</p>
+              <hr class="my-4">
+              <p>By Cliking on the button bellow you will redirect to the registering form and by completing the form you will use all of the site functionality</p>
+              <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Register</a>
+              </p>
+            </div>
+          {% endif %}
+
+            <div class="jumbotron">
+              <h1 class="display-4">Application</h1>
+              <p class="lead">Application is for simplicity for you to run it and it will Trading Automaticly for you.</p>
+              <hr class="my-4">
+              <p>Without even doing anything it will trading for you it couldn't be better.</p>
+              <p>Just download it and login with your username, password and API Token that is in your profile. it will do the rest.</p>
+              <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{{ app.application.url }}" role="button" >Download</a>
+              </p>
+            </div>
+
+      {% endblock body %}
+  </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+</html>

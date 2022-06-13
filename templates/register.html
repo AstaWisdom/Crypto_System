@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons submit='register'%}
+    {% endbuttons %}
+</form>
+{% endblock body %}
